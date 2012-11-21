@@ -1,10 +1,8 @@
-#ifndef WATCARDOFFICE_H
-#define WATCARDOFFICE_H
-#include<uFuture.h>
-#include "watCard.h"
+#pragma once
+#include <uC++.h>
 #include "bank.h"
+#include "watCard.h"
 #include "printer.h"
-
 
 _Task WATCardOffice {
     struct Args {
@@ -15,11 +13,19 @@ _Task WATCardOffice {
             : sid(sid), amount(amount), card(card) {}
     };
     struct Job {				// marshalled arguments and return future
+<<<<<<< HEAD
         Args args;				// call arguments (YOU DEFINE "Args")
         FWATCard result;			// return future
         Job( Args args ) : args( args ) {}
     };
     
+=======
+	//Args args;				// call arguments (YOU DEFINE "Args")
+	FWATCard result;			// return future
+	//Job( Args args ) : args( args ) {}
+    };
+    //_Task Courier { ... };			// communicates with bank
+>>>>>>> a46988e9101dd99f183a269bbc5fd673ccb4f086
 
     void main();
   public:
@@ -52,4 +58,3 @@ private:
         }
     };
 };
-#endif
