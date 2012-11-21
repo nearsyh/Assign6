@@ -1,4 +1,4 @@
-main.o: main.cc nameServer.h /usr/local/u++-6.0.0/inc/uC++.h \
+truck.o: truck.cc /usr/local/u++-6.0.0/inc/uC++.h \
  /usr/local/u++-6.0.0/inc/uStaticAssert.h \
  /usr/local/u++-6.0.0/inc/assert.h /usr/local/u++-6.0.0/inc/uAlign.h \
  /usr/local/u++-6.0.0/inc/uStack.h /usr/local/u++-6.0.0/inc/uCollection.h \
@@ -10,5 +10,5 @@ main.o: main.cc nameServer.h /usr/local/u++-6.0.0/inc/uC++.h \
  /usr/local/u++-6.0.0/inc/uCalendar.h /usr/local/u++-6.0.0/inc/uAlarm.h \
  /usr/local/u++-6.0.0/inc/uPIHeap.h /usr/local/u++-6.0.0/inc/uHeap.h \
  /usr/local/u++-6.0.0/inc/uBaseSelector.h \
- /usr/local/u++-6.0.0/inc/uLocalDebugger.h vendingMachine.h printer.h \
- config.h MPRNG.h bottlingPlant.h
+ /usr/local/u++-6.0.0/inc/uLocalDebugger.h truck.h printer.h nameServer.h \
+ bottlingPlant.h MPRNG.h vendingMachine.h
