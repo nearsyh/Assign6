@@ -6,5 +6,4 @@ Student::Student( Printer &prt, NameServer &nameServer, WATCardOffice &cardOffic
 }
 
 void Student::main() {
-
 }

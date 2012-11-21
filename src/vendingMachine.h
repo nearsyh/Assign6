@@ -2,7 +2,7 @@
 #define VENDINGMACHINE_H
 #include <uC++.h>
 
-#define FLA_SIZE 3
+#define FLA_SIZE 4
 _Monitor Printer;
 _Task NameServer;
 _Task WATCard;
