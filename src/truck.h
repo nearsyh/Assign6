@@ -11,7 +11,7 @@ _Task Truck {
 	NameServer &nameServer;
 	BottlingPlant &plant;
 	unsigned int *cargo;
-	unsigned int numVendingMachines, maxStockPerFlavour;
+	unsigned int soda_count, numVendingMachines, maxStockPerFlavour;
     void main();
   public:
     Truck( Printer &prt, NameServer &nameServer, BottlingPlant &plant,

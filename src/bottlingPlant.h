@@ -10,7 +10,7 @@ _Task BottlingPlant {
 	
 	Printer &prt;
 	NameServer &nameServer;
-	unsigned int numVendingMachines, maxShippedPerFlavour, 
+	unsigned int soda_count, numVendingMachines, maxShippedPerFlavour, 
 				 maxStockPerFlavour, timeBetweenShipments;
 	
 	unsigned int *soda_produced;

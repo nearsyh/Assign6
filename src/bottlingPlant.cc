@@ -16,28 +16,34 @@ BottlingPlant::BottlingPlant( Printer &prt, NameServer &nameServer, unsigned int
 
 void BottlingPlant::main(){
 
+	prt.print( Printer::BottlingPlant, 'S' );
+
 	//create a truck
 	Truck *truck = new Truck( prt, nameServer, *this, 
 			numVendingMachines, maxStockPerFlavour );
 	
 	while( true ){
-	
+		soda_count = 0;
+		
+		//in production
+		yield(timeBetweenShipments);
+		for( int i = 0; i < 4; i++ ){
+		
+			soda_produced[i] = generator(0, maxShippedPerFlavour);
+			soda_count += soda_produced[i];
+		}
+
+		prt.print( Printer::BottlingPlant, 'G', soda_count );
+
 		_Accept( ~BottlingPlant ){
 		
 			is_closing = true;
 			delete truck;
 			break;
-		} or _Accept( getShipment ){
-		
-			//in production
-			yield(timeBetweenShipments);
-			for( int i = 0; i < 4; i++ ){
-		
-				soda_produced[i] = generator(0, maxShippedPerFlavour);
-			}
-		
-		}
+		} or _Accept( getShipment ){ };
 	}
+
+	prt.print( Printer::BottlingPlant, 'F' );
 }
 
 bool BottlingPlant::getShipment( unsigned int cargo[] ){
@@ -46,8 +52,9 @@ bool BottlingPlant::getShipment( unsigned int cargo[] ){
 		return is_closing;
 		
 	else {
-	
-		cargo = soda_produced;
+		cout<<"to cpy"<<endl;
+		memcpy(cargo, soda_produced, 4 * sizeof( unsigned int ));
+		prt.print( Printer::BottlingPlant, 'P' );
 		return false;
 	}
 }
