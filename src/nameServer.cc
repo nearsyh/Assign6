@@ -5,8 +5,10 @@
 NameServer::NameServer(Printer &prt, unsigned int numVendingMachines, unsigned int numStudents)
     : prt(prt), numVendingMachines(numVendingMachines), numStudents(numStudents) {
         machineList = new VendingMachine*[numVendingMachines];
-        idToIndex = new int[numVendingMachines];
+        idToIndex = new int[numStudents];
         index = 0;
+        for(int i = 0; i < numStudents; i ++)
+            idToIndex[i] = -1;
 }
 NameServer::~NameServer() {
     delete []machineList;
@@ -15,13 +17,14 @@ NameServer::~NameServer() {
 
 void NameServer::VMregister(VendingMachine *machine) {
     assert(index < numVendingMachines);
-    idToIndex[machine->getId()] = index;
     machineList[index ++] = machine;
     prt.print(Printer::NameServer, 'R', machine->getId());
 }
 
 VendingMachine* NameServer::getMachine( unsigned int id ) {
-    assert(id < numVendingMachines && id >= 0);
+    assert(id < numStudents && id >= 0);
+    if(idToIndex[id] == -1) idToIndex[id] = id % numVendingMachines;
+    else idToIndex[id] = (idToIndex[id] + 1) % numVendingMachines;
     return machineList[idToIndex[id]];
 }
 

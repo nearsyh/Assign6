@@ -5,7 +5,7 @@
 #define FLA_SIZE 4
 _Monitor Printer;
 _Task NameServer;
-_Task WATCard;
+class WATCard;
 
 _Task VendingMachine {
     Printer &prt;
