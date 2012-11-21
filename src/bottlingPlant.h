@@ -1,14 +1,15 @@
-#include <uSemaphore.h>
+#pragma once
+#include <uC++.h>
 #include "nameServer.h"
 #include "printer.h"
 #include "MPRNG.h"
+
+extern PRNG generator;
 
 _Task BottlingPlant {
 	
 	Printer &prt;
 	NameServer &nameServer;
-	PRNG mprng;
-	Semaphore produced(0);
 	unsigned int numVendingMachines, maxShippedPerFlavour, 
 				 maxStockPerFlavour, timeBetweenShipments;
 	
