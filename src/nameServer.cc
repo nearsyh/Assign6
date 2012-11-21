@@ -37,10 +37,10 @@ void NameServer::main() {
     prt.print(Printer::NameServer, 'S');
     while(index < numVendingMachines)
         _Accept(VMregister);
-    prt.print(Printer::NameServer, 'F');
     while(true) {
-        _Accept(~NameServer)
-        or _Accept(getMachineList)
-            or _Accept(getMachine);
+        _Accept(~NameServer) {
+            prt.print(Printer::NameServer, 'F');
+        } or _Accept(getMachineList) {
+        } or _Accept(getMachine);
     }
 }
