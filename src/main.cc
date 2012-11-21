@@ -9,6 +9,8 @@ using namespace std;
 
 PRNG generator;
 
+#define TIME 1000000000
+
 #define CLEAN_ARRAY(length, array) {\
     for(unsigned int i = 0; i < length; i ++) delete array[i];\
 }

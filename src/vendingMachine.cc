@@ -36,11 +36,11 @@ void VendingMachine::main() {
     nameServer.VMregister(this);
     //TODO
     while(true) {
-        _Accept(~VendingMachine)
-        or _Accept(inventory) {
+        _Accept(~VendingMachine) {
+            prt.print(Printer::Vending, id, 'F');
+        } or _Accept(inventory) {
             _Accept(restocked);
             prt.print(Printer::Vending, id, 'R');
-        } or _Accpent(buy);
+        } or _Accept(buy);
     }
-    prt.print(Printer::Vending, id, 'F');
 }
