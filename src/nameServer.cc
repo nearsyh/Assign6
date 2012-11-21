@@ -38,4 +38,9 @@ void NameServer::main() {
     while(index < numVendingMachines)
         _Accept(VMregister);
     prt.print(Printer::NameServer, 'F');
+    while(true) {
+        _Accept(~NameServer)
+        or _Accept(getMachineList)
+            or _Accept(getMachine);
+    }
 }
