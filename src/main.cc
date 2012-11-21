@@ -35,6 +35,7 @@ void uMain::main() {
     for(unsigned int i = 0; i < param.numVendingMachines; i ++)
         machine[i] = new VendingMachine(prt, nameServer, i, param.sodaCost, param.maxStockPerFlavour );
 
+    for(int i = 0; i < TIME; i ++);
     /* clean up */
     CLEAN_ARRAY(param.numVendingMachines, machine);
 }

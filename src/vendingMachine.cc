@@ -17,11 +17,13 @@ _Nomutex unsigned int VendingMachine::getId() {
 }
 
 unsigned int * VendingMachine::inventory() {
+    prt.print(Printer::Vending, id, 'r');
     return inventoryList;
 }
 
 VendingMachine::Status VendingMachine::buy( Flavours flavour, WATCard &card ) {
-    //TODO
+    if(inventoryList[flavour] <= 0) return STOCK;
+    // TODO card balance
     return BUY;
 }
 
@@ -33,5 +35,12 @@ void VendingMachine::main() {
     prt.print(Printer::Vending, id, 'S', sodaCost);
     nameServer.VMregister(this);
     //TODO
+    while(true) {
+        _Accept(~VendingMachine)
+        or _Accept(inventory) {
+            _Accept(restocked);
+            prt.print(Printer::Vending, id, 'R');
+        } or _Accpent(buy);
+    }
     prt.print(Printer::Vending, id, 'F');
 }
