@@ -9,6 +9,7 @@ _Task NameServer {
     Printer &prt;
     unsigned int numVendingMachines, numStudents;
     VendingMachine **machineList;
+    int *idToIndex;
     unsigned int index;
     void main();
   public:
