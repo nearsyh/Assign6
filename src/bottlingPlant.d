@@ -10,4 +10,5 @@ bottlingPlant.o: bottlingPlant.cc /usr/local/u++-6.0.0/inc/uC++.h \
  /usr/local/u++-6.0.0/inc/uCalendar.h /usr/local/u++-6.0.0/inc/uAlarm.h \
  /usr/local/u++-6.0.0/inc/uPIHeap.h /usr/local/u++-6.0.0/inc/uHeap.h \
  /usr/local/u++-6.0.0/inc/uBaseSelector.h \
- /usr/local/u++-6.0.0/inc/uLocalDebugger.h
+ /usr/local/u++-6.0.0/inc/uLocalDebugger.h bottlingPlant.h nameServer.h \
+ printer.h MPRNG.h truck.h vendingMachine.h

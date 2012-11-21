@@ -1,6 +1,6 @@
 #include <uC++.h>
 #include <iostream>
-#include <ctime>
+#include "truck.h"
 
 using namespace std;
 
@@ -8,36 +8,33 @@ Truck::Truck( Printer &prt, NameServer &nameServer, BottlingPlant &plant,
 		unsigned int numVendingMachines, unsigned int maxStockPerFlavour ) : 
 			prt(prt), nameServer(nameServer), plant(plant), numVendingMachines(numVendingMachines), 
 			maxStockPerFlavour(maxStockPerFlavour){
-	
-	//initialize MPRNG with time seed.
-	time_t timet;
-	mprng.seed(time(&timet));	          	  
+
 }
 
 void Truck::main(){
 
 	//get vending machine list from name server.
-	VendingMachine* vm_list[] = nameServer.getMachineList();
+	VendingMachine **vm_list = nameServer.getMachineList();
 	
 	//yield random number [1,10] before shipment.
-	yield(mprng(1,10));
+	yield(generator(1,10));
 	
 	//get soda from plant
 	while( !plant.getShipment( cargo ) ){
 		
 		//for each vending machine, get its inventory and restock.
-		for( int i = 0; i < numVendingMachines; i++ ){
+		for( unsigned int i = 0; i < numVendingMachines; i++ ){
 		
-			unsigned int soda_inventory[] = vm_list[i] -> inventory();
+			unsigned int *soda_inventory = vm_list[i] -> inventory();
 			
 			//restock soda up to max.
-			for( int j = 0; 
+			for( unsigned int j = 0; 
 				j < sizeof(soda_inventory)/sizeof(unsigned int); i++ ){
 				
 				//if soda inventory less than max, restock.
 				if( soda_inventory[j] < maxStockPerFlavour ){
 				
-					int diff = maxStockPerFlavour - soda_inventory[j];
+					unsigned int diff = maxStockPerFlavour - soda_inventory[j];
 					//cargo not/just enough, restock all.
 					if( cargo[j] <= diff ){
 					

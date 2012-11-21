@@ -1,15 +1,16 @@
+#pragma once
 #include "printer.h"
 #include "nameServer.h"
 #include "bottlingPlant.h"
 #include "vendingMachine.h"
-#include "MPRNG.h"
+
+extern PRNG generator;
 
 _Task Truck {
 	Printer &prt;
 	NameServer &nameServer;
 	BottlingPlant &plant;
 	unsigned int *cargo;
-	PRNG mprng;
 	unsigned int numVendingMachines, maxStockPerFlavour;
     void main();
   public:
