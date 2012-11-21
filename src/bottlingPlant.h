@@ -7,7 +7,7 @@ _Task BottlingPlant {
 	
 	Printer &prt;
 	NameServer &nameServer;
-	MPRNG mprng;
+	PRNG mprng;
 	Semaphore produced(0);
 	unsigned int numVendingMachines, maxShippedPerFlavour, 
 				 maxStockPerFlavour, timeBetweenShipments;
