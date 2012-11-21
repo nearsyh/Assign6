@@ -1,10 +1,15 @@
+#pragma once
+#include <uC++.h>
+#include "bank.h"
+#include "watCard.h"
+
 _Task WATCardOffice {
     struct Job {				// marshalled arguments and return future
-	Args args;				// call arguments (YOU DEFINE "Args")
+	//Args args;				// call arguments (YOU DEFINE "Args")
 	FWATCard result;			// return future
-	Job( Args args ) : args( args ) {}
+	//Job( Args args ) : args( args ) {}
     };
-    _Task Courier { ... };			// communicates with bank
+    //_Task Courier { ... };			// communicates with bank
 
     void main();
   public:

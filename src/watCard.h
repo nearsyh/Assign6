@@ -1,3 +1,5 @@
+#include <uFuture.h>
+
 class WATCard {
     WATCard( const WATCard & );			// prevent copying
     WATCard &operator=( const WATCard & );
@@ -7,4 +9,5 @@ class WATCard {
     void withdraw( unsigned int amount );
     unsigned int getBalance();
 };
+
 typedef Future_ISM<WATCard *> FWATCard;		// future WATCard pointer
