@@ -58,4 +58,3 @@ bool BottlingPlant::getShipment( unsigned int cargo[] ){
 		return false;
 	}
 }
-

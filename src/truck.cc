@@ -60,5 +60,3 @@ void Truck::main(){
 		} //for
 	} //while
 }
-
-

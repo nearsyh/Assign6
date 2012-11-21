@@ -23,4 +23,3 @@ _Task BottlingPlant {
 
     bool getShipment( unsigned int cargo[] );
 };
-
