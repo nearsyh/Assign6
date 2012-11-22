@@ -7,7 +7,7 @@ NameServer::NameServer(Printer &prt, unsigned int numVendingMachines, unsigned i
         machineList = new VendingMachine*[numVendingMachines];
         idToIndex = new int[numStudents];
         index = 0;
-        for(int i = 0; i < numStudents; i ++)
+        for(unsigned int i = 0; i < numStudents; i ++)
             idToIndex[i] = -1;
 }
 NameServer::~NameServer() {
