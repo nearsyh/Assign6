@@ -8,6 +8,9 @@ _Monitor Printer;
 _Monitor Bank;
 
 _Task WATCardOffice {
+public:
+    _Event Lost {};
+private:
     struct Args {
         unsigned int sid;
         unsigned int amount;
@@ -33,7 +36,6 @@ _Task WATCardOffice {
     };
     void main();
 public:
-    _Event Lost {};
     WATCardOffice( Printer &prt, Bank &bank, unsigned int numCouriers );
     ~WATCardOffice();
     FWATCard create( unsigned int sid, unsigned int amount );

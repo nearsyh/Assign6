@@ -39,7 +39,7 @@ void Student::main() {
 		
 		catch( WATCardOffice::Lost ){
 
-            fWCard.reset();
+            //fWCard.reset();
 			getNewCard( fWCard );
 		} //catch
 
@@ -67,7 +67,7 @@ void Student::getNewCard( FWATCard &fWCard ){
 	catch( WATCardOffice::Lost ){
 
 		//card lost, get another card.
-        fWCard.reset();
+        //fWCard.reset();
 		prt.print(Printer::Student, id, 'L');
 		//delete fWCard;
 		getNewCard( fWCard );
@@ -101,7 +101,7 @@ void Student::buySoda( FWATCard &fWCard ){
 
 	catch( WATCardOffice::Lost ){
 
-        fWCard.reset();
+        //fWCard.reset();
 		prt.print(Printer::Student, id, 'L');
 		getNewCard( fWCard );
 		buySoda( fWCard );

@@ -73,8 +73,9 @@ void WATCardOffice::Courier::process() {
     prt.print(Printer::Courier, id, 't', job->args.sid, job->args.amount);
     bank.withdraw(job->args.sid, job->args.amount);
     (job->args.card)->deposit(job->args.amount);
-    if(generator(1, 6) == 1) assert(job->result.exception(new Lost()));
-    job->result.delivery(job->args.card);
+    if(generator(1, 6) == 1) { assert(job->result.exception(new Lost()))
+        delete job->args.card;
+    } else job->result.delivery(job->args.card);
     prt.print(Printer::Courier, id, 'T', job->args.sid, job->args.amount);
     delete job;
 }
