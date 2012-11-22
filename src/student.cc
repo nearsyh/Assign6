@@ -31,34 +31,22 @@ void Student::main() {
 	while ( ramMaxPurchases ){
 		
 		yield( generator(1, 10) );
-		try {
-
-			buySoda( fWCard );
-
-		} 
-		
-		catch( WATCardOffice::Lost ){
-
-            //fWCard.reset();
-			getNewCard( fWCard );
-		} //catch
-
+		buySoda( fWCard );
 		continue;		
-		
 	} //while
 
-    delete fWCard();
+	delete fWCard();
 	prt.print( Printer::Student, id, 'F' );
 }
 
 void Student::getVendingMachine(){
-
+	
 	vm = nameServer.getMachine( id );
-	prt.print( Printer::Student, 'V', vm->getId() );
+	prt.print( Printer::Student, id, 'V', vm->getId() );
 }
 
 void Student::getNewCard( FWATCard &fWCard ){
-
+	
 	try{
 
 		fWCard = cardOffice.create(id, 5);
@@ -67,21 +55,19 @@ void Student::getNewCard( FWATCard &fWCard ){
 	catch( WATCardOffice::Lost ){
 
 		//card lost, get another card.
-        //fWCard.reset();
 		prt.print(Printer::Student, id, 'L');
-		//delete fWCard;
 		getNewCard( fWCard );
 	}
 }
 
 void Student::buySoda( FWATCard &fWCard ){
-
+	
 	try{	
 		VendingMachine::Status status = vm->buy( (VendingMachine::Flavours)ramFavFlavour, *fWCard() );
 		if( status == VendingMachine::BUY ) { 
 		
 			prt.print(Printer::Student, id, 'B', fWCard() -> getBalance());			
-            ramMaxPurchases --;
+			ramMaxPurchases --;
 		}
 
 		else if( status == VendingMachine::STOCK ){
@@ -93,15 +79,13 @@ void Student::buySoda( FWATCard &fWCard ){
 		else if( status == VendingMachine::FUNDS ){
 
 			//transfer soda price + $5
-			cardOffice.transfer( id, (vm->cost() + 5), fWCard );
-			buySoda( fWCard );
+			fWCard = cardOffice.transfer( id, (vm->cost() + 5), fWCard );
 		}
 
 	}
 
 	catch( WATCardOffice::Lost ){
 
-        //fWCard.reset();
 		prt.print(Printer::Student, id, 'L');
 		getNewCard( fWCard );
 		buySoda( fWCard );

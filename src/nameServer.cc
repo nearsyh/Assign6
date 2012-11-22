@@ -25,6 +25,8 @@ VendingMachine* NameServer::getMachine( unsigned int id ) {
     assert(id < numStudents && id >= 0);
     if(idToIndex[id] == -1) idToIndex[id] = id % numVendingMachines;
     else idToIndex[id] = (idToIndex[id] + 1) % numVendingMachines;
+	prt.print( Printer::NameServer, 'N', id, idToIndex[id] );
+
     return machineList[idToIndex[id]];
 }
 
