@@ -25,18 +25,21 @@ WATCardOffice::~WATCardOffice() {
 }
 
 FWATCard WATCardOffice::create( unsigned int sid, unsigned int amount ) {
+    prt.print(Printer::WATCardOffice, 'C', sid, amount);
     Job *job = new Job(Args(sid, amount, NULL));
     jobList.push(job);
     return job->result;
 }
 
 FWATCard WATCardOffice::transfer( unsigned int sid, unsigned int amount, WATCard *card ) {
+    prt.print(Printer::WATCardOffice, 'T', sid, amount);
     Job *job = new Job(Args(sid, amount, card));
     jobList.push(job);
     return job->result;
 }
 
 WATCardOffice::Job* WATCardOffice::requestWork() {
+    prt.print(Printer::WATCardOffice, 'W');
     if(jobList.empty()) return NULL;
     Job *job = jobList.front();
     jobList.pop();
@@ -51,11 +54,8 @@ void WATCardOffice::main() {
                 _Accept(requestWork);
             break;
         } or _Accept(create) {
-            prt.print(Printer::WATCardOffice, 'C', jobList.front()->args.sid, jobList.front()->args.amount);
         } or _Accept(transfer) {
-            prt.print(Printer::WATCardOffice, 'T', jobList.front()->args.sid, jobList.front()->args.amount);
         } or _When(!jobList.empty()) _Accept(requestWork) {
-            prt.print(Printer::WATCardOffice, 'W');
         }
     }
     prt.print(Printer::WATCardOffice, 'F');
@@ -73,9 +73,9 @@ void WATCardOffice::Courier::process() {
     prt.print(Printer::Courier, id, 't', job->args.sid, job->args.amount);
     bank.withdraw(job->args.sid, job->args.amount);
     (job->args.card)->deposit(job->args.amount);
+    if(generator(1, 6) == 1) assert(job->result.exception(new Lost()));
     job->result.delivery(job->args.card);
     prt.print(Printer::Courier, id, 'T', job->args.sid, job->args.amount);
-    if(generator(1, 6) == 1) job->result.exception(new Lost());
     delete job;
 }
 

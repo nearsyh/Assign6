@@ -6,6 +6,7 @@
 #include "nameServer.h"
 #include "vendingMachine.h"
 
+using namespace std;
 extern PRNG generator;
 
 Student::Student( Printer &prt, NameServer &nameServer, WATCardOffice &cardOffice, unsigned int id, 
@@ -33,12 +34,12 @@ void Student::main() {
 		try {
 
 			buySoda( fWCard );
-            ramMaxPurchases --;
 
 		} 
 		
 		catch( WATCardOffice::Lost ){
 
+            fWCard.reset();
 			getNewCard( fWCard );
 		} //catch
 
@@ -66,6 +67,7 @@ void Student::getNewCard( FWATCard &fWCard ){
 	catch( WATCardOffice::Lost ){
 
 		//card lost, get another card.
+        fWCard.reset();
 		prt.print(Printer::Student, id, 'L');
 		//delete fWCard;
 		getNewCard( fWCard );
@@ -79,6 +81,7 @@ void Student::buySoda( FWATCard &fWCard ){
 		if( status == VendingMachine::BUY ) { 
 		
 			prt.print(Printer::Student, id, 'B', fWCard() -> getBalance());			
+            ramMaxPurchases --;
 		}
 
 		else if( status == VendingMachine::STOCK ){
@@ -98,6 +101,7 @@ void Student::buySoda( FWATCard &fWCard ){
 
 	catch( WATCardOffice::Lost ){
 
+        fWCard.reset();
 		prt.print(Printer::Student, id, 'L');
 		getNewCard( fWCard );
 		buySoda( fWCard );

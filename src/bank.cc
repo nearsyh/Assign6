@@ -16,4 +16,5 @@ void Bank::withdraw( unsigned int id, unsigned int amount ) {
     while(accounts[id] < amount) {
         conditions[id].wait();
     }
+    accounts[id] -= amount;
 }
