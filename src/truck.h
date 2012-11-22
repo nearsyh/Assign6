@@ -10,7 +10,7 @@ _Task Truck {
 	Printer &prt;
 	NameServer &nameServer;
 	BottlingPlant &plant;
-	unsigned int *cargo;
+	unsigned int cargo[4];
 	unsigned int soda_count, numVendingMachines, maxStockPerFlavour;
     void main();
   public:

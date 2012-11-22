@@ -14,13 +14,17 @@ BottlingPlant::BottlingPlant( Printer &prt, NameServer &nameServer, unsigned int
 	soda_produced = new unsigned int[4];
 }
 
+BottlingPlant::~BottlingPlant() {
+    delete []soda_produced;
+    delete truck;
+}
+
 void BottlingPlant::main(){
 
 	prt.print( Printer::BottlingPlant, 'S' );
 
 	//create a truck
-	Truck *truck = new Truck( prt, nameServer, *this, 
-			numVendingMachines, maxStockPerFlavour );
+	truck = new Truck( prt, nameServer, *this, numVendingMachines, maxStockPerFlavour );
 	
 	while( true ){
 		soda_count = 0;
@@ -36,9 +40,8 @@ void BottlingPlant::main(){
 		prt.print( Printer::BottlingPlant, 'G', soda_count );
 
 		_Accept( ~BottlingPlant ){
-		
 			is_closing = true;
-			delete truck;
+            _Accept( getShipment );
 			break;
 		} or _Accept( getShipment ){ };
 	}
@@ -52,7 +55,6 @@ bool BottlingPlant::getShipment( unsigned int cargo[] ){
 		return is_closing;
 		
 	else {
-		cout<<"to cpy"<<endl;
 		memcpy(cargo, soda_produced, 4 * sizeof( unsigned int ));
 		prt.print( Printer::BottlingPlant, 'P' );
 		return false;

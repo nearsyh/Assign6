@@ -48,4 +48,6 @@ void uMain::main() {
 	delete bottlingPlant;
     CLEAN_ARRAY(param.numVendingMachines, machines);
 	delete nameServer;
+    delete cardOffice;
+    delete bank;
 }

@@ -1,0 +1,124 @@
+Parent	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Mach0	Mach1	Mach2	Cour0	Cour1	Cour2	
+*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	
+		S						S1						
+	S	R0	S	S	S2,3	S1,2	S3,5		S1	S1	S	S	S	
+	C0,5	R1												
+	C0,5	R2		G16										
+	C0,5										t0,5			
+	W				V0						T0,5	t1,5		
+	W				V1							T1,5	t2,5	
+to cpy
+got inventory
+			P16	P				r					T2,5	
+id got
+to restocked
+	W		d0,16		V2			R						
+			U0,5											
+got inventory
+			D0,1						r					
+id got
+to restocked
+			d1,1						R					
+			U1,19											
+got inventory
+			D1,0							r				
+id got
+to restocked
+			d2,0	G10	V2					R				
+			U2,20											
+to cpy
+			D2,0	P										
+got inventory
+			P10					r						
+id got
+to restocked
+			d0,10					R						
+			U0,1											
+got inventory
+			D0,6						r					
+id got
+to restocked
+			d1,6		V0			B2,5						
+			U1,13		B4				R					
+got inventory
+			D1,0							r				
+id got
+to restocked
+			d2,0	G14			B4	B3,5		R				
+			U2,20											
+to cpy
+			D2,0	P										
+got inventory
+			P14					r						
+id got
+to restocked
+...	...	...	...	...	...	F	...	...	...	...	...	...	...	
+			d0,14		V0			R						
+			U0,1											
+got inventory
+			D0,12						r					
+id got
+to restocked
+			d1,12		B3			B2,5	R					
+			U1,6											
+got inventory
+			D1,5							r				
+id got
+to restocked
+			d2,5	G15	B2			B2,4						
+...	...	...	...	...	F	...	...	...	...	...	...	...	...	
+			U2,15							R				
+to cpy
+			D2,0	P										
+got inventory
+			P15					r						
+id got
+to restocked
+			d0,15					R						
+got inventory
+			D0,12						r					
+id got
+to restocked
+			d1,12				B3	B3,5	R					
+got inventory
+			D1,6							r				
+id got
+to restocked
+			d2,6	G15						R				
+			U2,10											
+to cpy
+			D2,1	P										
+got inventory
+			P15					r						
+id got
+to restocked
+			d0,15					R						
+got inventory
+			D0,14						r					
+id got
+to restocked
+			d1,14						R					
+got inventory
+			D1,14							r				
+id got
+to restocked
+			d2,14	G14			B2	B3,5		R				
+			U2,2											
+to cpy
+			D2,6	P										
+got inventory
+			P14					r						
+id got
+to restocked
+			d0,14					R						
+got inventory
+			D0,13						r					
+id got
+to restocked
+			d1,13				B1	B3,5						
+...	...	...	...	...	...	...	F	...	...	...	...	...	...	
+got inventory
+			D1,13						R	r				
+id got
+to restocked
+			d2,13	G11						R				

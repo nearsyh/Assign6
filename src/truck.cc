@@ -10,7 +10,6 @@ Truck::Truck( Printer &prt, NameServer &nameServer, BottlingPlant &plant,
 			maxStockPerFlavour(maxStockPerFlavour){
 	
 	soda_count = 0;
-	cargo = new unsigned int[4];
 }
 
 void Truck::main(){
@@ -40,9 +39,7 @@ void Truck::main(){
 			unsigned int soda_unplenished = 0;
 
 			unsigned int *soda_inventory = vm_list[i] -> inventory();
-			cout<<"got inventory"<<endl;
 			prt.print( Printer::Truck, 'd', vm_list[i] -> getId(), soda_count );
-			cout<<"id got"<<endl;
 			//restock soda up to max.
 			for( unsigned int j = 0; j < 4; j++ ){
 				
@@ -72,7 +69,6 @@ void Truck::main(){
 				
 			} //for
 			
-			cout<<"to restocked"<<endl;
 			//restock complete, signal.
 			vm_list[i] -> restocked();
 			if( !is_successful )

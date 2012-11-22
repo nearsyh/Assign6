@@ -41,8 +41,8 @@ void Printer::printState() {
             cout << (char)states[i];
             switch(numParam[i]) {
                 case 0: break;
-                case 1: cout << " " << param[0][i]; break;
-                case 2: cout << " " << param[0][i] << "," << param[1][i]; break;
+                case 1: cout << param[0][i]; break;
+                case 2: cout << param[0][i] << "," << param[1][i]; break;
                 default: break;
             }
         }

@@ -27,7 +27,7 @@ VendingMachine::Status VendingMachine::buy( Flavours flavour, WATCard &card ) {
     else if(card.getBalance() < sodaCost) return FUNDS;// TODO card balance
     else {
         card.withdraw(sodaCost);
-        prt.print(Printer::Vending, id, 'R');
+        prt.print(Printer::Vending, id, 'B', flavour, inventoryList[flavour] --);
         return BUY;
     }
 }
@@ -43,9 +43,10 @@ void VendingMachine::main() {
     //TODO
     while(true) {
         _Accept(~VendingMachine) {
-            prt.print(Printer::Vending, id, 'F');
+            break;
         } or _Accept(inventory) {
             _Accept(restocked);
         } or _Accept(buy);
     }
+    prt.print(Printer::Vending, id, 'F');
 }

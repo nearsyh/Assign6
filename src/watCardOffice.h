@@ -22,11 +22,13 @@ _Task WATCardOffice {
     };
     _Task Courier {
         Job *job;
+        Printer &prt;
+        unsigned int id;
         WATCardOffice &cardOffice;
         void process();
         void main();
     public:
-        Courier(WATCardOffice &cardOffice);
+        Courier(Printer &prt, unsigned int id, WATCardOffice &cardOffice);
     };
     void main();
 public:
@@ -40,6 +42,7 @@ private:
     Printer &prt;
     Bank &bank;
     unsigned int numCouriers;
+    bool isFinished;
     queue<Job*> jobList;
     Courier **couriers;
 };

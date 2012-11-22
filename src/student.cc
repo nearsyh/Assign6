@@ -33,6 +33,7 @@ void Student::main() {
 		try {
 
 			buySoda( fWCard );
+            ramMaxPurchases --;
 
 		} 
 		
@@ -45,6 +46,7 @@ void Student::main() {
 		
 	} //while
 
+    delete fWCard();
 	prt.print( Printer::Student, id, 'F' );
 }
 
