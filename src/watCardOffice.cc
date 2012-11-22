@@ -1,6 +1,7 @@
 #include "watCardOffice.h"
 #include "watCard.h"
 #include "printer.h"
+#include "bank.h"
 #include <iostream>
 using namespace std;
 
@@ -9,7 +10,7 @@ WATCardOffice::WATCardOffice( Printer &prt, Bank &bank, unsigned int numCouriers
     couriers = new Courier*[numCouriers];
     isFinished = true;
     for(unsigned int i = 0; i < numCouriers; i ++)
-        couriers[i] = new Courier(prt, i, *this);
+        couriers[i] = new Courier(prt, i, *this, bank);
 }
 
 WATCardOffice::~WATCardOffice() {
@@ -60,14 +61,14 @@ void WATCardOffice::main() {
 /*****************************************************************/
 /*                      task courier                             */
 /*****************************************************************/
-WATCardOffice::Courier::Courier(Printer &prt, unsigned int id, WATCardOffice &cardOffice)
-            : prt(prt), id(id), cardOffice(cardOffice) {};
+WATCardOffice::Courier::Courier(Printer &prt, unsigned int id, WATCardOffice &cardOffice, Bank &bank)
+            : prt(prt), id(id), cardOffice(cardOffice), bank(bank) {};
 
 void WATCardOffice::Courier::process() {
     if(!job->args.card)
         job->args.card = new WATCard();
     prt.print(Printer::Courier, id, 't', job->args.sid, job->args.amount);
-    //bank.withdraw(job->args.amount);
+    bank.withdraw(job->args.sid, job->args.amount);
     (job->args.card)->deposit(job->args.amount);
     job->result.delivery(job->args.card);
     prt.print(Printer::Courier, id, 'T', job->args.sid, job->args.amount);

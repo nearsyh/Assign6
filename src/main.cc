@@ -6,6 +6,7 @@
 #include "bank.h"
 #include "watCardOffice.h"
 #include "student.h"
+#include "parent.h"
 #include "MPRNG.h"
 #include<iostream>
 using namespace std;
@@ -38,6 +39,7 @@ void uMain::main() {
         machines[i] = new VendingMachine(prt, *nameServer, i, param.sodaCost, param.maxStockPerFlavour );
     BottlingPlant *bottlingPlant = new BottlingPlant( prt, *nameServer, param.numVendingMachines, param.maxShippedPerFlavour, param.maxStockPerFlavour, param.timeBetweenShipments );
     Bank *bank = new Bank(param.numStudents);
+    Parent *parent = new Parent(prt, *bank, param.numStudents, param.parentalDelay);
     WATCardOffice *cardOffice = new WATCardOffice(prt, *bank, param.numCouriers );
     Student *students[param.numStudents];
     for(unsigned int i = 0; i < param.numStudents; i ++)
@@ -45,9 +47,10 @@ void uMain::main() {
 
     for(int i = 0; i < TIME; i ++);
     CLEAN_ARRAY(param.numStudents, students);
-	delete bottlingPlant;
+    delete parent;
+    delete bottlingPlant;
     CLEAN_ARRAY(param.numVendingMachines, machines);
-	delete nameServer;
+    delete nameServer;
     delete cardOffice;
     delete bank;
 }

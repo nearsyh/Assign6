@@ -25,10 +25,11 @@ _Task WATCardOffice {
         Printer &prt;
         unsigned int id;
         WATCardOffice &cardOffice;
+        Bank &bank;
         void process();
         void main();
     public:
-        Courier(Printer &prt, unsigned int id, WATCardOffice &cardOffice);
+        Courier(Printer &prt, unsigned int id, WATCardOffice &cardOffice, Bank &bank);
     };
     void main();
 public:

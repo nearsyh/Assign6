@@ -3,7 +3,7 @@ CXXFLAGS = -g -Wall -Wno-unused-label -MMD -DIMPLTYPE_${TYPE}
 MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}	# makefile name
 
 # object files forming 1st executable with prefix "q1"
-OBJECTS = student.o vendingMachine.o printer.o nameServer.o main.o config.o bottlingPlant.o truck.o watCard.o watCardOffice.o bank.o
+OBJECTS = student.o vendingMachine.o printer.o nameServer.o main.o config.o bottlingPlant.o truck.o watCard.o watCardOffice.o bank.o parent.o
 DEPENDS = ${OBJECTS:.o=.d}						# substitute ".o" with ".d"
 EXEC = soda
 
