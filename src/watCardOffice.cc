@@ -2,8 +2,11 @@
 #include "watCard.h"
 #include "printer.h"
 #include "bank.h"
+#include "MPRNG.h"
 #include <iostream>
 using namespace std;
+
+extern PRNG generator;
 
 WATCardOffice::WATCardOffice( Printer &prt, Bank &bank, unsigned int numCouriers )
     : prt(prt), bank(bank), numCouriers(numCouriers) {
@@ -72,6 +75,7 @@ void WATCardOffice::Courier::process() {
     (job->args.card)->deposit(job->args.amount);
     job->result.delivery(job->args.card);
     prt.print(Printer::Courier, id, 'T', job->args.sid, job->args.amount);
+    if(generator(1, 6) == 1) job->result.exception(new Lost());
     delete job;
 }
 
