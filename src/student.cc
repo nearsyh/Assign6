@@ -2,6 +2,9 @@
 #include <iostream>
 #include "student.h"
 #include "MPRNG.h"
+#include "printer.h"
+#include "nameServer.h"
+#include "vendingMachine.h"
 
 extern PRNG generator;
 

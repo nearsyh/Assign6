@@ -2,13 +2,10 @@
 #define STUDENT_H
 
 #include <uC++.h>
-#include "printer.h"
-#include "nameServer.h"
 #include "watCardOffice.h"
-#include "vendingMachine.h"
-//_Monitor Printer;
-//_Task NameServer;
-//_Task WATCardOffice;
+_Monitor Printer;
+_Task NameServer;
+_Task VendingMachine;
 
 _Task Student {
     Printer &prt;

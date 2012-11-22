@@ -45,3 +45,23 @@ void WATCardOffice::main() {
     }
     prt.print(Printer::WATCardOffice, 'F');
 }
+
+/*****************************************************************/
+/*                      task courier                             */
+/*****************************************************************/
+WATCardOffice::Courier::Courier(WATCardOffice &cardOffice)
+            : cardOffice(cardOffice) {};
+
+void WATCardOffice::Courier::process() {
+    if(!job->args.card)
+        job->args.card = new WATCard();
+    //bank.withdraw(job->args.amount);
+    (job->args.card)->deposit(job->args.amount);
+    job->result.delivery(job->args.card);
+}
+void WATCardOffice::Courier::main() {
+    while(true) {
+        job = cardOffice.requestWork();
+        process();
+    }
+}

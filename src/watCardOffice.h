@@ -1,11 +1,11 @@
 #pragma once
 #include<uC++.h>
-#include "watCard.h"
 #include<queue>
+#include "watCard.h"
 using namespace std;
 
 _Monitor Printer;
-_Task Bank;
+_Monitor Bank;
 
 _Task WATCardOffice {
     struct Args {
@@ -20,8 +20,16 @@ _Task WATCardOffice {
         FWATCard result;			// return future
         Job( Args args ) : args( args ) {}
     };
+    _Task Courier {
+        Job *job;
+        WATCardOffice &cardOffice;
+        void process();
+        void main();
+    public:
+        Courier(WATCardOffice &cardOffice);
+    };
     void main();
-  public:
+public:
     _Event Lost {};
     WATCardOffice( Printer &prt, Bank &bank, unsigned int numCouriers );
     ~WATCardOffice();
@@ -33,26 +41,5 @@ private:
     Bank &bank;
     unsigned int numCouriers;
     queue<Job*> jobList;
-
-    _Task Courier {
-        Job *job;
-        WATCardOffice &cardOffice;
-        void process() {
-            if(!job->args.card)
-                job->args.card = new WATCard();
-            //bank.withdraw(job->args.amount);
-            (job->args.card)->deposit(job->args.amount);
-            job->result.delivery(job->args.card);
-        }
-        void main() {
-            while(true) {
-                job = cardOffice.requestWork();
-                process();
-            }
-        }
-        public:
-        Courier(WATCardOffice &cardOffice)
-            : cardOffice(cardOffice) {};
-    };
     Courier **couriers;
 };

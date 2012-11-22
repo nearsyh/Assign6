@@ -1,3 +1,4 @@
+#pragma once
 #include<uC++.h>
 _Monitor Bank {
   public:
