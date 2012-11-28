@@ -13,8 +13,6 @@ using namespace std;
 
 PRNG generator;
 
-#define TIME 100
-
 #define CLEAN_ARRAY(length, array) {\
     for(unsigned int i = 0; i < length; i ++) delete array[i];\
 }
@@ -45,7 +43,7 @@ void uMain::main() {
     for(unsigned int i = 0; i < param.numStudents; i ++)
         students[i] = new Student(prt, *nameServer, *cardOffice, i, param.maxPurchases );
 
-    for(int i = 0; i < TIME; i ++);
+    /* clean up */
     CLEAN_ARRAY(param.numStudents, students);
     delete parent;
     delete bottlingPlant;
