@@ -24,7 +24,7 @@ unsigned int * VendingMachine::inventory() {
 
 VendingMachine::Status VendingMachine::buy( Flavours flavour, WATCard &card ) {
     if(inventoryList[flavour] <= 0) return STOCK;
-    else if(card.getBalance() < sodaCost) return FUNDS;// TODO card balance
+    else if(card.getBalance() < sodaCost) return FUNDS;
     else {
         card.withdraw(sodaCost);
         prt.print(Printer::Vending, id, 'B', flavour, inventoryList[flavour] --);

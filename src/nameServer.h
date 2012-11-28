@@ -9,7 +9,7 @@ _Task NameServer {
     Printer &prt;
     unsigned int numVendingMachines, numStudents;
     VendingMachine **machineList;
-    unsigned int *idToIndex;                                // transfer the student id to the index of the vending machine
+    int *idToIndex;                                // transfer the student id to the index of the vending machine
     unsigned int index;                                     // store the current index
     void main();
   public:

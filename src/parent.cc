@@ -14,6 +14,7 @@ void Parent::main() {
         _Accept(~Parent) {
             break;
         } else {
+            /* pick a student and an amount randomly */
             int id = generator(numStudents-1);
             int money = generator(1, 3);
             yield(parentalDelay);

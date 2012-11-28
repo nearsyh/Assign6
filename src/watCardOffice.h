@@ -12,9 +12,9 @@ public:
     _Event Lost {};
 private:
     struct Args {
-        unsigned int sid;
-        unsigned int amount;
-        WATCard *card;
+        unsigned int sid;           // student id
+        unsigned int amount;        // the amount
+        WATCard *card;              // the card
         Args(unsigned int sid, unsigned int amount, WATCard *card)
             : sid(sid), amount(amount), card(card) {}
     };
@@ -45,7 +45,6 @@ private:
     Printer &prt;
     Bank &bank;
     unsigned int numCouriers;
-    bool isFinished;
-    queue<Job*> jobList;
+    queue<Job*> jobList;        // job queue, FIFO
     Courier **couriers;
 };

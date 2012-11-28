@@ -2,7 +2,7 @@
 #include<uC++.h>
 _Monitor Bank {
     unsigned int *accounts;
-    uCondition *conditions;
+    uCondition *conditions;         // every account should be independent from others, every one has its own lock
   public:
     Bank( unsigned int numStudents );
     ~Bank();

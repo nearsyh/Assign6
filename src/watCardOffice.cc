@@ -11,14 +11,12 @@ extern PRNG generator;
 WATCardOffice::WATCardOffice( Printer &prt, Bank &bank, unsigned int numCouriers )
     : prt(prt), bank(bank), numCouriers(numCouriers) {
     couriers = new Courier*[numCouriers];
-    isFinished = true;
     for(unsigned int i = 0; i < numCouriers; i ++)
         couriers[i] = new Courier(prt, i, *this, bank);
 }
 
 WATCardOffice::~WATCardOffice() {
     assert(jobList.empty());
-    isFinished = true;
     for(unsigned int i = 0; i < numCouriers; i ++)
         delete couriers[i];
     delete []couriers;
@@ -51,6 +49,7 @@ void WATCardOffice::main() {
     while(true) {
         _Accept(~WATCardOffice) {
             for(unsigned int i = 0; i < numCouriers; i ++)
+                /* if constructor called, wake all couriers */
                 _Accept(requestWork);
             break;
         } or _Accept(create) {
@@ -68,19 +67,19 @@ WATCardOffice::Courier::Courier(Printer &prt, unsigned int id, WATCardOffice &ca
             : prt(prt), id(id), cardOffice(cardOffice), bank(bank) {};
 
 void WATCardOffice::Courier::process() {
-    if(!job->args.card)
-        job->args.card = new WATCard();
+    if(!job->args.card) job->args.card = new WATCard();
     prt.print(Printer::Courier, id, 't', job->args.sid, job->args.amount);
-    bank.withdraw(job->args.sid, job->args.amount);
+    bank.withdraw(job->args.sid, job->args.amount);                             // bank stuff
     (job->args.card)->deposit(job->args.amount);
-    if(generator(1, 6) == 3) { assert(job->result.exception(new Lost()))
+    if(generator(1, 6) == 3) { assert(job->result.exception(new Lost()))        // lost at 1 over 6
         delete job->args.card;
-    } else job->result.delivery(job->args.card);
+    } else job->result.delivery(job->args.card);                                // transfer to the future
     prt.print(Printer::Courier, id, 'T', job->args.sid, job->args.amount);
     delete job;
 }
 
 void WATCardOffice::Courier::main() {
+    /* just request for job and process it*/
     prt.print(Printer::Courier, id, 'S');
     while(true) {
         job = cardOffice.requestWork();
