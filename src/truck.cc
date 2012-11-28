@@ -17,8 +17,6 @@ void Truck::main(){
 	prt.print(Printer::Truck, 'S');
 	//get vending machine list from name server.
 	VendingMachine **vm_list = nameServer.getMachineList();
-	//yield random number [1,10] before shipment.
-	yield(generator(1,10));
 	
 	//get soda from plant
 	while( !plant.getShipment( cargo ) ){
@@ -33,7 +31,8 @@ void Truck::main(){
 		prt.print( Printer::Truck, 'P', (int)soda_count);
 
 		//for each vending machine, get its inventory and restock.
-		for( unsigned int i = 0; i < numVendingMachines; i++ ){
+		for( unsigned int i = 0; (i < numVendingMachines) && 
+			(soda_count > 0); i++ ){
 		
 			bool is_successful = true;
 			unsigned int soda_unplenished = 0;
@@ -76,6 +75,9 @@ void Truck::main(){
 			
 			prt.print( Printer::Truck, 'D', vm_list[i] -> getId(), soda_count );
 		} //for
+	
+		//yield random number [1,10] before shipment.
+		yield(generator(1,10));
 	} //while
 
 	prt.print( Printer::Truck, 'F' );

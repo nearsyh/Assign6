@@ -31,6 +31,7 @@ void BottlingPlant::main(){
 		
 		//in production
 		yield(timeBetweenShipments);
+		
 		for( int i = 0; i < 4; i++ ){
 		
 			soda_produced[i] = generator(0, maxShippedPerFlavour);
