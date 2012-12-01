@@ -23,11 +23,13 @@ void Student::main() {
 	ramMaxPurchases = generator(1, maxPurchases);
 	ramFavFlavour = generator( 0, 3 );
 	prt.print( Printer::Student, id, 'S', ramFavFlavour, ramMaxPurchases );
+	
 	//create a watcard
 	FWATCard fWCard;
 	getNewCard( fWCard );
 	getVendingMachine();
 
+	//keep buying soda until maxpurchase is reached
 	while ( ramMaxPurchases ){
 		
 		yield( generator(1, 10) );
@@ -47,6 +49,7 @@ void Student::getVendingMachine(){
 
 void Student::getNewCard( FWATCard &fWCard ){
 	
+	//try getting new card, if lost, get another one recursively.
 	try{
 
 		fWCard = cardOffice.create(id, 5);
@@ -62,6 +65,7 @@ void Student::getNewCard( FWATCard &fWCard ){
 
 void Student::buySoda( FWATCard &fWCard ){
 	
+	//try buying one soda, if lost card, get another one.
 	try{	
 		VendingMachine::Status status = vm->buy( (VendingMachine::Flavours)ramFavFlavour, *fWCard() );
 		if( status == VendingMachine::BUY ) { 

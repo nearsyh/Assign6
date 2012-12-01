@@ -32,6 +32,7 @@ void BottlingPlant::main(){
 		//in production
 		yield(timeBetweenShipments);
 		
+		//produce soda
 		for( int i = 0; i < 4; i++ ){
 		
 			soda_produced[i] = generator(0, maxShippedPerFlavour);
@@ -40,6 +41,7 @@ void BottlingPlant::main(){
 
 		prt.print( Printer::BottlingPlant, 'G', soda_count );
 
+		//if not closing, accept a truck
 		_Accept( ~BottlingPlant ){
 			is_closing = true;
             _Accept( getShipment );

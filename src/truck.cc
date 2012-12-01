@@ -70,6 +70,8 @@ void Truck::main(){
 			
 			//restock complete, signal.
 			vm_list[i] -> restocked();
+			
+			//if restocking not successful
 			if( !is_successful )
 				prt.print( Printer::Truck, 'U', vm_list[i] -> getId(), soda_unplenished );
 			
@@ -78,6 +80,7 @@ void Truck::main(){
 	
 		//yield random number [1,10] before shipment.
 		yield(generator(1,10));
+		
 	} //while
 
 	prt.print( Printer::Truck, 'F' );
